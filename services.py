@@ -30,6 +30,20 @@ def extract_data_from_url(url):
         return []
 
 def extract_info_from_site(url, title):
+    # Definir o template fora do try para que possa ser usado no except
+    info_template = {
+        'Name': title,
+        'Category': '',
+        'Business Description': '',
+        'Long Business Description': '',
+        'Based in': '',
+        'Tags': '',
+        'Total Funding': '',
+        'Founded': '',
+        'Website': '',
+        'Company Status': ''
+    }
+    
     try:
         print(f'Extraindo informações do site: {url}')
         
@@ -40,19 +54,6 @@ def extract_info_from_site(url, title):
             
             soup = BeautifulSoup(response.content, 'html.parser')
             
-            info_template = {
-                'Name': title,
-                'Category': '',
-                'Business Description': '',
-                'Long Business Description': '',
-                'Based in': '',
-                'Tags': '',
-                'Total Funding': '',
-                'Founded': '',
-                'Website': '',
-                'Company Status': ''
-            }
-            
             for key in info_template.keys():
                 if key != 'Name':
                     info_template[key] = get_info(soup, key)
@@ -62,10 +63,10 @@ def extract_info_from_site(url, title):
             return info_template
         else:
             print(f'Erro ao acessar a URL: {url}')
-            return {key: '' for key in info_template.keys()}
+            return info_template
     except Exception as e:
         print(f'Erro ao processar a URL {url}: {e}')
-        return {key: '' for key in info_template.keys()}
+        return info_template
 
 def get_info(soup, label):
     try:
