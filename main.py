@@ -1,5 +1,6 @@
 import json
 import os
+import time
 from constants import PAGE_MAX, BACKUP_STEP_1_FILE_NAME, BACKUP_STEP_2_FILE_NAME, FINAL_FILE, BASE_URL
 from services import extract_data_from_url, extract_info_from_site, process_json_data
 
@@ -30,6 +31,9 @@ if not all_data:
             with open(BACKUP_STEP_1_FILE_NAME, "w") as backup_file:
                 json.dump({"data": all_data}, backup_file)
                 backup_file.write("\n")
+            
+            # Delay para evitar rate limiting
+            time.sleep(2)
 
         except Exception as e:
             print(f"Erro ao processar a página {page_number}: {e}")
@@ -51,6 +55,9 @@ for item in all_data:
 
         if info:
             dados.append(info)
+
+        # Delay para evitar rate limiting
+        time.sleep(1)
 
     except Exception as e:
         print(f"Erro ao processar o item. {e}")
