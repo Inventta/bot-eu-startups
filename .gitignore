@@ -1,0 +1,8 @@
+.venv/
+__pycache__/
+.DS_Store
+.backup-step-*
+.new-base-labi.xlsx
+.clean-base-labi.xlsx
+.concatenated.xlsx
+.base-labi-final.xlsx

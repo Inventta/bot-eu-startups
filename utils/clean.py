@@ -1,8 +1,12 @@
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 import pandas as pd
 from constants import CLEAN_FILE, FINAL_FILE
 
 # Ler as 10 primeiras linhas do arquivo transformed_data.xlsx
-data = pd.read_excel(f"../{FINAL_FILE}")
+data = pd.read_excel(FINAL_FILE)
 
 # Remover duplicatas com base na coluna "Organization Name"
 data_limpo = data.drop_duplicates(subset="Organization Name", keep="first")

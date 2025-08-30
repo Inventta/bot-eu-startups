@@ -1,5 +1,6 @@
 PAGE_MIN = 1
-PAGE_MAX = 2608
+# PAGE_MAX = 2
+PAGE_MAX = 3051
 
 # FILES NAMES
 BACKUP_STEP_1_FILE_NAME = "backup-step-1.json"
