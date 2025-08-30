@@ -68,3 +68,54 @@ Quando terminar de trabalhar no projeto, você pode desativar o ambiente virtual
 ```bash
 deactivate
 ```
+
+## Para rodar em segundo plano (Instâncias/Servidores) 🖥️
+
+**IMPORTANTE:** Use estes scripts quando quiser executar em segundo plano (continua rodando mesmo fechando o terminal).
+
+### Preparar os scripts (uma vez só):
+```bash
+chmod +x run_main.sh run_clean.sh run_concat.sh run_refine.sh
+```
+
+### Executar na ordem (um por vez):
+```bash
+# 1. Coleta de dados
+./run_main.sh
+
+# 2. Limpeza dos dados (execute após o main terminar)
+./run_clean.sh
+
+# 3. Concatenação (execute após o clean terminar)
+./run_concat.sh
+
+# 4. Refinamento final (execute após o concat terminar)
+./run_refine.sh
+```
+
+### Comandos úteis para acompanhar:
+
+**Ver logs em tempo real:**
+```bash
+# Substitua [timestamp] pelo nome do arquivo gerado (ex: 30082025-1048_main.log)
+tail -f [timestamp]_main.log
+tail -f [timestamp]_clean.log
+tail -f [timestamp]_concat.log
+tail -f [timestamp]_refine.log
+```
+
+**Verificar se os processos estão rodando:**
+```bash
+ps aux | grep main.py
+ps aux | grep clean.py
+ps aux | grep concat.py
+ps aux | grep refine.py
+```
+
+**Parar processos (se necessário):**
+```bash
+pkill -f main.py
+pkill -f clean.py
+pkill -f concat.py
+pkill -f refine.py
+```
